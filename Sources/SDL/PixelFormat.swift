@@ -73,10 +73,18 @@ internal extension SDLPixelFormat.Format {
 public extension SDLPixelFormat.Format {
     
     /// SDL_PIXELFORMAT_INDEX1LSB
+    #if os(Linux)
+    static let index1LSB = SDLPixelFormat.Format(rawValue: UInt32(SDL_PIXELFORMAT_INDEX1LSB))
+    #elseif os(macOS)
     static let index1LSB = SDLPixelFormat.Format(rawValue: UInt32(SDL_PIXELFORMAT_INDEX1LSB.rawValue))
+    #endif
     
     /// SDL_PIXELFORMAT_INDEX1MSB
+    #if os(Linux)
+    static let index1MSB = SDLPixelFormat.Format(rawValue: UInt32(SDL_PIXELFORMAT_INDEX1MSB))
+    #elseif os(macOS)
     static let index1MSB = SDLPixelFormat.Format(rawValue: UInt32(SDL_PIXELFORMAT_INDEX1MSB.rawValue))
+    #endif
     
     #if os(macOS)
     /// SDL_PIXELFORMAT_ARGB32
@@ -84,7 +92,11 @@ public extension SDLPixelFormat.Format {
     #endif
     
     /// SDL_PIXELFORMAT_ARGB8888
+    #if os(macOS)
     static let argb8888 = SDLPixelFormat.Format(rawValue: UInt32(SDL_PIXELFORMAT_ARGB8888.rawValue))
+    #elseif os(Linux)
+    static let argb8888 = SDLPixelFormat.Format(rawValue: UInt32(SDL_PIXELFORMAT_ARGB8888))
+    #endif
 }
 
 // MARK: - ExpressibleByIntegerLiteral
